@@ -1,25 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // your code here
-  let form = document.getElementById('create-task-form');
-  form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  toDoList(e.target['new-task-description'].value);
-  form.reset()
-})
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("create-task-form");
+  const taskList = document.getElementById("tasks");
+
+  form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Get the task description entered by the user
+      const taskInput = document.getElementById("new-task-description");
+      const taskDescription = taskInput.value;
+
+      // Create a new list item to hold the task description
+      const listItem = document.createElement("li");
+      listItem.textContent = taskDescription;
+
+      // Append the new task to the task list
+      taskList.appendChild(listItem);
+
+      // Clear the input field after submitting
+      taskInput.value = "";
+
+      // Optionally, you can focus on the input field again
+      taskInput.focus();
+  });
 });
-
-function toDoList(todo) {
-  let li = document.createElement('li')
-  li.textContent = `${todo}`
-  let ul = document.querySelector('ul')
-  ul.appendChild(li)
-  let btn = document.createElement('button')
-  btn.textContent = " X "
-  li.appendChild( btn)
-  btn.addEventListener('click', deleteButton)
-}
-
-function deleteButton(e) {
-  e.target.parentNode.remove();
-}
-
